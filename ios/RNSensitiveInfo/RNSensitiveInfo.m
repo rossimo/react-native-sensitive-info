@@ -54,7 +54,7 @@ CFStringRef convertkSecAccessControl(NSString* key){
 }
 
 // Messages from the comments in <Security/SecBase.h>
-NSString *messageForError(NSError *error)
+NSString *messageForError2(NSError *error)
 {
   switch (error.code) {
     case errSecUnimplemented:
@@ -103,7 +103,7 @@ NSString *messageForError(NSError *error)
 
 NSDictionary * makeError(NSError *error)
 {
-  return RCTMakeAndLogError(messageForError(error), nil, [error dictionaryWithValuesForKeys:@[@"domain", @"code"]]);
+  return RCTMakeAndLogError(messageForError2(error), nil, [error dictionaryWithValuesForKeys:@[@"domain", @"code"]]);
 }
 
 
@@ -134,7 +134,7 @@ RCT_EXPORT_METHOD(setItem:(NSString*)key value:(NSString*)value options:(NSDicti
     osStatus = SecItemAdd((__bridge CFDictionaryRef) query, NULL);
     if (osStatus != noErr) {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:osStatus userInfo:nil];
-        reject([NSString stringWithFormat:@"%ld",(long)error.code], messageForError(error), nil);
+        reject([NSString stringWithFormat:@"%ld",(long)error.code], messageForError2(error), nil);
         return;
     }
     resolve(nil);
@@ -167,7 +167,7 @@ RCT_EXPORT_METHOD(getItem:(NSString *)key options:(NSDictionary *)options resolv
 
   if (osStatus != noErr && osStatus != errSecItemNotFound) {
     NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:osStatus userInfo:nil];
-    reject([NSString stringWithFormat:@"%ld",(long)error.code], messageForError(error), nil);
+    reject([NSString stringWithFormat:@"%ld",(long)error.code], messageForError2(error), nil);
     return;
   }
 
@@ -256,7 +256,7 @@ RCT_EXPORT_METHOD(deleteItem:(NSString *)key options:(NSDictionary *)options res
     OSStatus osStatus = SecItemDelete((__bridge CFDictionaryRef) query);
     if (osStatus != noErr && osStatus != errSecItemNotFound) {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:osStatus userInfo:nil];
-        reject([NSString stringWithFormat:@"%ld",(long)error.code], messageForError(error), nil);
+        reject([NSString stringWithFormat:@"%ld",(long)error.code], messageForError2(error), nil);
         return;
     }
     resolve(nil);
