@@ -12,7 +12,7 @@
 RCT_EXPORT_MODULE();
 
 // Messages from the comments in <Security/SecBase.h>
-NSString *messageForError22(NSError *error)
+NSString *messageForError2(NSError *error)
 {
   switch (error.code) {
     case errSecUnimplemented:
