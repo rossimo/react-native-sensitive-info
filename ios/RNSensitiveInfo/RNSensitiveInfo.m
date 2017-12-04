@@ -12,7 +12,7 @@
 RCT_EXPORT_MODULE();
 
 // Messages from the comments in <Security/SecBase.h>
-NSString *messageForError(NSError *error)
+NSString *messageForError22(NSError *error)
 {
   switch (error.code) {
     case errSecUnimplemented:
@@ -61,7 +61,7 @@ NSString *messageForError(NSError *error)
 
 NSDictionary * makeError(NSError *error)
 {
-  return RCTMakeAndLogError(messageForError(error), nil, [error dictionaryWithValuesForKeys:@[@"domain", @"code"]]);
+  return RCTMakeAndLogError(messageForError2(error), nil, [error dictionaryWithValuesForKeys:@[@"domain", @"code"]]);
 }
 
 
